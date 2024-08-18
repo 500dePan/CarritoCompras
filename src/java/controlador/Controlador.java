@@ -11,6 +11,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import modeloVC.Carrito;
 import modeloVC.Producto;
 import modeloVC.ProductoDAO;
 
@@ -20,7 +21,13 @@ import modeloVC.ProductoDAO;
  */
 public class Controlador extends HttpServlet {
     ProductoDAO pdao=new ProductoDAO();
+    Producto p=new Producto();
     List<Producto> productos = new ArrayList<>();
+    List<Carrito> listaCarrito = new ArrayList<>();
+    
+    int item;
+    double totalPagar = 0.0;
+    int cantidad = 1;
       
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -28,7 +35,26 @@ public class Controlador extends HttpServlet {
         String accion = request.getParameter("accion");
         productos=pdao.listar();
         switch (accion){
-            case "Ejemplo":
+            case "AgregarCarrito":
+                int idp=Integer.parseInt(request.getParameter("id"));
+                p=pdao.listarId(idp);
+                item = item+1;
+                Carrito car=new Carrito();
+                car.setItem(item);
+                car.setIdProducto(p.getId());
+                car.setNombres(p.getNombres());
+                car.setDescripcion(p.getDescripcion());
+                car.setPrecioCompra(p.getPrecio());
+                car.setCantidad(cantidad);
+                car.setSubTotal(cantidad*p.getPrecio());
+                listaCarrito.add(car);
+                request.setAttribute("contador", listaCarrito.size());
+                request.getRequestDispatcher("Controlador?accion=home").forward(request, response);
+                break;
+            case "Carrito":
+                totalPagar = 0.0;
+                request.setAttribute("carrito", listaCarrito);
+                request.getRequestDispatcher("carrito.jsp").forward(request, response);
                 break;
             default:
                 request.setAttribute("productos", productos);
