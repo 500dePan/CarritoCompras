@@ -4,6 +4,7 @@
     Author     : David
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -57,6 +58,8 @@
             </div>
         </nav>
         <div class="container mt-4">
+            <<h3>Carrito</h3>
+            <br>
             <div class="row">
                 <div class="col-sm-8">
                     <table class="table table-hover">
@@ -72,19 +75,45 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
+                            <c:forEach var="car" items="${carrito}">
+                                <tr>
+                                    <td>${car.getItem()}</td>
+                                    <td>${car.getNombres()}</td>
+                                    <td>${car.getDescripcion()}
+                                        <img src ="ControladorIMG?id=${car.getIdProducto()}" width="100" height="100">
+                                    </td>
+                                    <td>${car.getPrecioCompra()}</td>
+                                    <td>${car.getCantidad()}</td>
+                                    <td>${car.getSubTotal()}</td>
+                                    <td>
+                                        <a href="#">eliminar</a>
+                                        <a href="#">editar</a>
+                                    </td>
+                                </tr>  
+                            </c:forEach>
+
                         </tbody>
                     </table>
                 </div>
                 <div class="col-sm-4">
-                    
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Generar Compra</h3>
+                        </div>
+                        <div class="card-body">
+                            <label>Subtotal:</label>
+                            <input type="text" value="$.${totalPagar}0" readonly="" class="form/control">
+                            <label>Descuento:</label>
+                            <input type="text" value="$.0.00" readonly="" class="form/control">
+                            <label>Total pagar:</label>
+                            <input type="text" value="$.${totalPagar}0" readonly="" class="form/control">
+                        </div>
+                        <div class="card-footer">
+                            <a href="#" class="btn btn-info btn-block" >Realizar pago</a>
+                            <a href="#" class="btn btn-danger btn-block" >Generar compra</a>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
