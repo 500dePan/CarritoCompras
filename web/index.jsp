@@ -40,13 +40,12 @@
                             Iniciar Sesion
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Something else here</a>
+                            <a class="dropdown-item" href="Controlador?accion=Login">Iniciar Sesion</a>
+                            <a class="dropdown-item" href="Controlador?accion=Registrar">Registrarse</a>
+                            <a href="Controlador?accion=Logout">Cerrar Sesión</a>
+
                         </div>
                     </li>
-
                 </ul>
 
             </div>
