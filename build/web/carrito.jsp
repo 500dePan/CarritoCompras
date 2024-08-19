@@ -1,9 +1,3 @@
-<%-- 
-    Document   : carrito
-    Created on : 18 ago 2024, 13:28:49
-    Author     : David
---%>
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -58,7 +52,7 @@
             </div>
         </nav>
         <div class="container mt-4">
-            <<h3>Carrito</h3>
+            <h3>Carrito</h3>
             <br>
             <div class="row">
                 <div class="col-sm-8">
@@ -83,7 +77,10 @@
                                         <img src ="ControladorIMG?id=${car.getIdProducto()}" width="100" height="100">
                                     </td>
                                     <td>${car.getPrecioCompra()}</td>
-                                    <td>${car.getCantidad()}</td>
+                                    <td>
+                                        <input type="hidden" id="idpro" value="${car.getIdProducto()}">
+                                        <input type="number" id="Cantidad" value="${car.getCantidad()}" class="form-control text-center" min="1">
+                                    </td>
                                     <td>${car.getSubTotal()}</td>
                                     <td>
                                         <input type="hidden" id="idp" value="${car.getIdProducto()}">
@@ -91,7 +88,6 @@
                                     </td>
                                 </tr>  
                             </c:forEach>
-
                         </tbody>
                     </table>
                 </div>
